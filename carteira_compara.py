@@ -82,6 +82,8 @@ print("-------------- Carteira 2-----------------")
 print(carteira2.iloc[len(carteira2)-1])
 print("------------------------------------------")
 
+
+# configurar o grafico
 plt.title("Comparação entre carteiras")
 plt.ylabel('Retorno em R$')
 plt.xlabel('Desempenho no tempo: ' + tempo_comparacao_anos)

@@ -7,7 +7,6 @@ import random
 from random import sample
 sns.set()
 
-
 # Valor de investimento para simulacao
 valor_para_investir = 1500
 tempo_comparacao_anos = '2y'
@@ -26,8 +25,7 @@ dados_yahoo_carteira2 = yf.download(
 ibov = yf.download('BOVA11.SA', period=tempo_comparacao_anos)["Adj Close"]
 ibov = ibov / ibov.iloc[0]
 
-
-# Retirar linhas e ativos que nao possuem informacoes completas
+# Retirar linhas e ativos que nao possuem informacoes completas carteira 1 e carteira 2
 dados_yahoo_carteira1.dropna(how='all', inplace=True)
 dados_yahoo_carteira1.dropna(
     axis=1, inplace=True, thresh=len(dados_yahoo_carteira1))
@@ -77,12 +75,12 @@ carteira2['saldo'].plot(
 # Plotar o indice do ibovespa no grafico
 (ibov * valor_para_investir).plot(linewidth=2, color='black', label="IBOVESPA")
 
-print("-------------- Carteira 1----------------")
+print("-------------- Carteira 1-----------------")
 print(carteira1.iloc[len(carteira1)-1])
-print("-----------------------------------------")
-print("-------------- Carteira 2----------------")
+print("------------------------------------------")
+print("-------------- Carteira 2-----------------")
 print(carteira2.iloc[len(carteira2)-1])
-print("-----------------------------------------")
+print("------------------------------------------")
 
 plt.title("Comparação entre carteiras")
 plt.ylabel('Retorno em R$')

@@ -31,10 +31,16 @@ for coluna in ['Div.Yield', 'Mrg Ebit', 'Mrg. Líq.', 'ROIC', 'ROE', 'Cresc. Rec
     df[coluna] = df[coluna].str.replace(',', '.')
     df[coluna] = df[coluna].str.rstrip('%').astype('float') / 100
 
-# pegando as empresas com liquidez maior de 1MM
+# pegando as empresas com liquidez maior de 1MM (média diaria dos ultimos 2 meses) -
 df = df[df['Liq.2meses'] > 1000000]
 
 # gerar ranking das 150 empresas e calcular a formula magica
+# Formula magica EV/EBIT -> valor da da empresa / divido pelo seu lucro operacional sem impostos e despesas financeiras(EBIT)
+#                           indice baixo - a acao pode estar sendo subavaliada pelo mercado e mostra potencial de alta
+#                ROIC -> Retorno sobre o Capital investido (Return on invested capital) Ebit/capital investido
+#                        quanto maior o indice - maior o retorno sobre o capital investido
+#               A ideia é analisar os ativos para verificar a empresa que tem Roic alto e menor EV/EBIT
+
 ranking = pd.DataFrame()
 ranking['pos'] = range(1, 151)
 ranking['EV/EBIT'] = df[df['EV/EBIT'] >
